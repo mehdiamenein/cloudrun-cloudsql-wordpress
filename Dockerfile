@@ -18,9 +18,9 @@ RUN apt-get update && apt-get install curl -y
 RUN curl -o /usr/local/bin/cloud_sql_proxy https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 && chmod +x /usr/local/bin/cloud_sql_proxy
 
 # custom entrypoint
-COPY wordpress/cloud-run-entrypoint.sh /usr/local/bin/
+# COPY wordpress/cloud-run-entrypoint.sh /usr/local/bin/
 
-RUN chmod u+x /usr/local/bin/docker-entrypoint.sh
+# RUN chmod u+x /usr/local/bin/docker-entrypoint.sh
 
-ENTRYPOINT ["cloud-run-entrypoint.sh","docker-entrypoint.sh"]
+ENTRYPOINT ["cloud_sql_proxy -instances=${CLOUDSQL_INSTANCE}=tcp:3306","docker-entrypoint.sh"]
 CMD ["apache2-foreground"]
