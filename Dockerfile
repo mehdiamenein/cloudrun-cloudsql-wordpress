@@ -22,5 +22,5 @@ RUN curl -o /usr/local/bin/cloud_sql_proxy https://dl.google.com/cloudsql/cloud_
 
 # RUN chmod u+x /usr/local/bin/docker-entrypoint.sh
 
-ENTRYPOINT ["cloud_sql_proxy -instances=${CLOUDSQL_INSTANCE}=tcp:3306","docker-entrypoint.sh"]
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["apache2-foreground"]
